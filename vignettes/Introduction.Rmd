@@ -267,27 +267,30 @@ should work for eukaryote species with multi-exonic
 genes (metazoans & plants).
 
 ## `max_zeros`
-The `max_zeros` parameter (default value `0.75`) is used as a first filter.
-Features with more than this proportion of cells with zero expression will be
+The `max_zeros` parameter (default value `0.75`) is used as a first filtering
+step.
+Features that present zero-expression in a proportion of cells higher than the 
+set threshold will be
 removed. Zero expression can reflect both an absence of expression in the cell
-of origin, or a drop-out event during the library preparation. This technical
-drop out can be quite high in scRNAseq protocols. More stringent values for
-this parameter could be `0.5` or `0.25`. As features with many zero-expression
-events are usually lowly expressed in other cells, this parameter will 
-mostly impact the number of bins in the rest of the method,
-adding or removing lowly expressed bins of features.
-
+of origin, or a drop-out event occuring during library preparation.
+Ocurrence of these technical
+drop-outs can be quite high in scRNAseq protocols. More stringent values for
+this parameter could be `0.5` or `0.25`. This parameter will mostly impact the
+total number of features, and therefore the number of bins that the data 
+is divided into. This filtering step will remove low-expression,
+highly affected by noise features before the method is applied.
 
 ## `top_window_size`
-The `top_window_size` parameter (default to `100`) can have significant impacts
-on the rest of the pipeline. It sets the number of feature with the highest mean
+The `top_window_size` parameter (default to `100`) can have a significant impact
+on the rest of the pipeline. It sets the number of features with the highest mean
 expression that will be used as a reference bin. If the reference window is too
 small (i.e. `10`), it will not capture enough of the biological variation.
-On the contrary, a too large window (i.e. `2000`) might include to many features
-highly affected from technical variations to be of any use. We therefore suggest
-keeping it at `100` or near that value.
+On the contrary, a too large top window (i.e. `2000`) might include features
+mildly affected by technical variation, diluting the biological component 
+of the variation too much to be of any use.
+We therefore suggest keeping it at `100` or near that value.
 
-The function `plot_top_window_autocor` can be used to visualy explore the mean
+The function `plot_top_window_autocor` can be used to visually explore the mean
 auto-correlation value of features in the top bin with themselves depending on
 the number of features in the top bin:
 ```{r, collapse=TRUE}
@@ -297,9 +300,10 @@ plot_top_window_autocor(calculate_cvs(scData_hESC))
 
 ## `other_window_size`
 The `other_window_size` parameter (default to `1000`) is the number of 
-features included in the other bins of feature. It can safely be decreased to
-`500` or `250`, which will result in more bins, without changing much the
-proposed filtering threshold:
+features included in the bins of features (outside the top window).
+It is a more flexible parameter, and can safely be decreased to
+`500` or `250`, (which will result in more bins) without significantly 
+altering the proposed filtering threshold:
 ```{r, collapse=TRUE}
 metrics_bigBins <- scData_hESC %>%
     calculate_cvs %>%
@@ -326,17 +330,24 @@ plot_grid(
 ## `n_random`
 The background correlation values used to determine a threshold are 
 calculated by
-shuffling of the values in the top bin expression matrices. `n_random`
-(default to 3) sets the number of control bins that will be generated. 
-Results differ only marginally between the different random windows,
-there is not much need to
-increase that value. Increasing it will increase the computation time.
+randomly shuffling the expression values of features in the top window.
+`n_random` (default to 3) sets the number of control bins that will
+be generated. 
+Note that increasing this value will also increase the computation time.
+and given that results differ only marginally among the randomised windows,
+there is not much need to increase that value.
+Results differ only marginally between the different random windows, therefore
+there is not much need to generate more than 3 control windows.
 
 ## `threshold`
-One can decide which bin of features one want to keep by looking at the
-`plot_metric` or `plot_correlations_distributions` plots.
-We also provide an automatic threshold decision, keeping only windows of
-feature with a mean correlation value with the top window higher than 
-`threshold` (default to 2) times the background level, estimated using 
-randomised top bins. Depending on the downstream applications, one
-can increase the `threshold` value to be more stringent in the selection.
+One can decide which bins of features to keep by looking at the
+`plot_metric` or `plot_correlations_distributions` plots,
+by visually exploring their correlation to the top bin of features.
+We also provide an automatic threshold decision method, which keeps only windows
+of features whose mean correlation value to the top window is higher than 
+`threshold` (default to 2) times the background level.
+The background level of correlation is estimated using the randomised control
+bins. Depending on the intended downstream analyses, one
+can increase the `threshold` value to be more stringent in the feature
+selection, keeping less features, but ensuring that they will contain
+a sufficiently high amount of biological information.

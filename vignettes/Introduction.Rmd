@@ -267,43 +267,43 @@ should work for eukaryote species with multi-exonic
 genes (metazoans & plants).
 
 ## `max_zeros`
-The `max_zeros` parameter (default value `0.75`) is used in a preliminary filtering step.
-When set to default, features that present zero expression in a proportion of cells higher 
-than 0.75 will be removed. Zero expression can reflect both an absence of expression 
-in the cell of origin, or a drop-out event generated during library preparation. 
-Ocurrence of these technical drop-outs can be quite high in scRNAseq protocols. 
-More stringent values for this parameter could be `0.5` or `0.25`. This parameter will 
-mostly impact the total number of features, and therefore the number of bins that the 
-data is divided into, removing low-expression, highly affected by noise features (and bins)
-before the method is applied.
-
+The `max_zeros` parameter (default value `0.75`) is used as a first filtering
+step.
+Features that present zero-expression in a proportion of cells higher than the 
+set threshold will be
+removed. Zero expression can reflect both an absence of expression in the cell
+of origin, or a drop-out event occuring during library preparation.
+Ocurrence of these technical
+drop-outs can be quite high in scRNAseq protocols. More stringent values for
+this parameter could be `0.5` or `0.25`. This parameter will mostly impact the
+total number of features, and therefore the number of bins that the data 
+is divided into. This filtering step will remove low-expression,
+highly affected by noise features before the method is applied.
 
 ## `top_window_size`
 The `top_window_size` parameter (default to `100`) can have a significant impact
 on the rest of the pipeline. It sets the number of features with the highest mean
-expression that will be selected in the reference bin. If the reference window is too
-small (i.e. `10`), it will not capture enough of the biological variation and will
-not be reliable to discriminate technical and biological variability in the rest of the
-data. On the contrary, a large top window (i.e. `2000`) might include moderately expressed
-features that are mildly affected by technical variation, diluting the biological component
-of the variation too much to be of any use. We therefore suggest keeping it at `100` or 
-near that value, depending on the specific characteristics of your data.
+expression that will be used as a reference bin. If the reference window is too
+small (i.e. `10`), it will not capture enough of the biological variation.
+On the contrary, a too large top window (i.e. `2000`) might include features
+mildly affected by technical variation, diluting the biological component 
+of the variation too much to be of any use.
+We therefore suggest keeping it at `100` or near that value.
 
 The function `plot_top_window_autocor` can be used to visually explore the mean
-auto-correlation value of features in the top bin with themselves, depending on
+auto-correlation value of features in the top bin with themselves depending on
 the number of features in the top bin:
 ```{r, collapse=TRUE}
 plot_top_window_autocor(calculate_cvs(scData_hESC))
 ```
-Top-window sizes yielding higher auto-correlation will likely be optimal for subsequent
-thresholding and filtering.
 
 
 ## `other_window_size`
 The `other_window_size` parameter (default to `1000`) is the number of 
-features included in the other bins of features (features remaining outside the top window). 
-It is a more flexible parameter, and can safely be decreased to `500` or `250` (which 
-will result in more bins) without significantly altering the proposed filtering threshold:
+features included in the bins of features (outside the top window).
+It is a more flexible parameter, and can safely be decreased to
+`500` or `250`, (which will result in more bins) without significantly 
+altering the proposed filtering threshold:
 ```{r, collapse=TRUE}
 metrics_bigBins <- scData_hESC %>%
     calculate_cvs %>%
@@ -329,20 +329,25 @@ plot_grid(
 
 ## `n_random`
 The background correlation values used to determine a threshold are 
-calculated by randomly shuffling the expression values of features in the top window. 
-`n_random` (default to 3) sets the number of control bins that will be generated. 
-Note that increasing this value will also increase the computation time, and given 
-that results differ only marginally among the randomised windows, 
+calculated by
+randomly shuffling the expression values of features in the top window.
+`n_random` (default to 3) sets the number of control bins that will
+be generated. 
+Note that increasing this value will also increase the computation time.
+and given that results differ only marginally among the randomised windows,
 there is not much need to increase that value.
+Results differ only marginally between the different random windows, therefore
+there is not much need to generate more than 3 control windows.
 
 ## `threshold`
 One can decide which bins of features to keep by looking at the
-`plot_metric` or `plot_correlations_distributions` plots, by visually exploring
-their correlation to the top bin of features.
-We also provide an automatic threshold decision method, which keeps only windows 
+`plot_metric` or `plot_correlations_distributions` plots,
+by visually exploring their correlation to the top bin of features.
+We also provide an automatic threshold decision method, which keeps only windows
 of features whose mean correlation value to the top window is higher than 
-`threshold` times the background level (default to 2). The background level of
-correlation is estimated using the randomised control bins. Depending on the 
-downstream analysis that is intended, one can increase the `threshold` value to be 
-more stringent in feature selection, keeping less features, but ensuring that they
-will contain a sufficiently high amount of biological information.
+`threshold` (default to 2) times the background level.
+The background level of correlation is estimated using the randomised control
+bins. Depending on the intended downstream analyses, one
+can increase the `threshold` value to be more stringent in the feature
+selection, keeping less features, but ensuring that they will contain
+a sufficiently high amount of biological information.

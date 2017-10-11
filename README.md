@@ -4,7 +4,7 @@ By Angeles Arzalluz-Luque, Guillaume Devailly, Anna Mantsoki & Anagha Joshi.
 ![scFeatureFilter outputs](inst/figure1_small.png)
 
 
-An R package to set thresholds for feature (gene, transcript, ...) selection in single cell RNA sequencing analyses.
+An R package to set thresholds for feature (gene, transcript, ...) filtering in single cell RNA sequencing analyses.
 
 # How to install?
 You can install the development version of scFeatureFilter using `devtools` (Require R version ≥ 3.4.2):

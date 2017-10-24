@@ -1,6 +1,6 @@
 ---
 title: "Introduction to the scFeatureFilter package"
-author: "Angeles Arzalluz-Luque, Guillaume Devailly, Anna Mantsoki, Anagha Joshi"
+author: "Angeles Arzalluz-Luque, Guillaume Devailly, Anagha Joshi"
 date: "`r Sys.Date()`"
 output: BiocStyle::html_document
 vignette: >

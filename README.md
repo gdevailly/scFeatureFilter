@@ -18,7 +18,7 @@ Load the package:
 library(scFeatureFilter)
 ```
 
-Then it is probably a good idea to read the package vignette:
+Then it is probably a good idea to read the package [vignette](https://gdevailly.github.io/scFeatureFilterVignette.html):
 ```R
 vignette("Introduction", package = "scFeatureFilter")
 ```

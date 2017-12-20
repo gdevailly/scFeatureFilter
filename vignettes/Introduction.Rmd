@@ -51,10 +51,11 @@ to every feature in the reference bin and the control bins to obtain correlation
 Ultimately, the variation of the distributions of correlation coefficients can be used to inform the threshold decision.
 
 ## Installation
-The development version of `scFeatureFilter` can be installed from GitHub using
-`devtools`:
+The stable version of `scFeatureFilter` can be installed from Bioconductor:
 ```{r, eval = FALSE}
-devtools::install_github("gdevailly/scFeatureFilter")
+## try http:// if https:// URLs are not supported
+source("https://bioconductor.org/biocLite.R")
+biocLite("scFeatureFilter")
 ```
 
 

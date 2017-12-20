@@ -7,7 +7,14 @@ By Angeles Arzalluz-Luque, Guillaume Devailly, Anna Mantsoki & Anagha Joshi.
 An R package to set thresholds for feature (gene, transcript, ...) filtering in single cell RNA sequencing analyses.
 
 # How to install?
-You can install the development version of scFeatureFilter using `devtools` (Require R version ≥ 3.4.2):
+You can install the stable version of scFeatureFilter from Bioconductor (Require R version ≥ 3.5):
+```R
+## try http:// if https:// URLs are not supported
+source("https://bioconductor.org/biocLite.R")
+biocLite("scFeatureFilter")
+```
+
+You can install the development version of scFeatureFilter using `devtools` (Require R version ≥ 3.5):
 ```R
 devtools::install_github("gdevailly/scFeatureFilter")
 ```

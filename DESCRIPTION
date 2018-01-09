@@ -2,7 +2,7 @@ Package: scFeatureFilter
 Type: Package
 Title: A correlation-based method for quality filtering of single-cell RNAseq
     data
-Version: 0.99.5
+Version: 0.99.6
 Authors@R: c(
 	person("Angeles", "Arzalluz-Luque", email = "angeles.arzalluz@gmail.com", role = c("aut")),
 	person("Guillaume", "Devailly", email = "gdevailly@hotmail.com", role = c("aut", "cre")),
@@ -18,8 +18,8 @@ Imports: dplyr (>= 0.7.3), ggplot2 (>= 2.1.0), magrittr (>= 1.5), rlang (>= 0.1.
     tibble (>= 1.3.4), stats, methods
 RoxygenNote: 6.0.1
 Suggests: testthat,
-    knitr,
-    rmarkdown,
-    SingleCellExperiment, SummarizedExperiment, scRNAseq, cowplot
+    knitr, rmarkdown, BiocStyle,
+    SingleCellExperiment, SummarizedExperiment, scRNAseq,
+    cowplot
 VignetteBuilder: knitr
 biocViews: SingleCell, RNASeq, Preprocessing, GeneExpression

@@ -54,8 +54,9 @@ Ultimately, the variation of the distributions of correlation coefficients can b
 The stable version of `scFeatureFilter` can be installed from Bioconductor:
 ```{r, eval = FALSE}
 ## try http:// if https:// URLs are not supported
-source("https://bioconductor.org/biocLite.R")
-biocLite("scFeatureFilter")
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("scFeatureFilter")
 ```
 
 

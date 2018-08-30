@@ -10,8 +10,9 @@ An R package to set thresholds for feature (gene, transcript, ...) filtering in 
 You can install the stable version of scFeatureFilter from Bioconductor (Require R version ≥ 3.5):
 ```R
 ## try http:// if https:// URLs are not supported
-source("https://bioconductor.org/biocLite.R")
-biocLite("scFeatureFilter")
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("scFeatureFilter")
 ```
 
 You can install the development version of scFeatureFilter using `devtools` (Require R version ≥ 3.5):

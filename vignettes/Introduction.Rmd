@@ -248,8 +248,8 @@ One can retrieve a filtered `SingleCellExperiment` objects like this:
 ```{r, message=FALSE, warning=FALSE, collapse=TRUE}
 library(SingleCellExperiment)
 library(scRNAseq) # example datasets
-data("allen")
-sce_allen <- as(allen, "SingleCellExperiment")
+
+sce_allen <- ReprocessedAllenData()
 
 # sce_allen is an SingleCellExperiment object
 sce_allen

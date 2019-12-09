@@ -22,4 +22,4 @@ Suggests: testthat,
     SingleCellExperiment, SummarizedExperiment, scRNAseq,
     cowplot
 VignetteBuilder: knitr
-biocViews: SingleCell, RNASeq, Preprocessing, GeneExpression
+biocViews: ImmunoOncology, SingleCell, RNASeq, Preprocessing, GeneExpression

@@ -15,19 +15,19 @@ result <- tibble::tibble(
 )
 
 test_that("giving the right result", {
-    expect_equal(
+    expect_equivalent(
         calculate_cvs(myDF1),
         result
     )
-    expect_equal(
+    expect_equivalent(
         calculate_cvs(myDF2),
         result
     )
-    expect_equal(
+    expect_equivalent(
         calculate_cvs(myMatrix),
         result
     )
-    expect_equal(
+    expect_equivalent(
         calculate_cvs(myTibble),
         result
     )

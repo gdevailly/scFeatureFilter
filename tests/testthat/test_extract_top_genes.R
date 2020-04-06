@@ -19,22 +19,22 @@ result2 <- list(
 result2$topgenes$bin <- 1
 
 test_that("Giving the expected result", {
-    expect_equal(
+    expect_equivalent(
         suppressMessages(define_top_genes(input1, window_size = 2)),
         result1
     )
-    expect_equal(
+    expect_equivalent(
         suppressMessages(define_top_genes(input1, mean_expression = 4)),
         result1
     )
-    expect_equal(
+    expect_equivalent(
         suppressMessages(define_top_genes(input1, min_expression = 4)),
         result1
     )
 })
 
 test_that("Working with ties", {
-    expect_equal(
+    expect_equivalent(
         suppressMessages(define_top_genes(input1, window_size = 3)),
         result2
     )

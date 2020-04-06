@@ -82,23 +82,27 @@ define_top_genes <- function(dataset,
         divided_data$restofgenes <- sorted_values[-(1:nrow(divided_data$topgenes)), ]
 
     } else if (is.numeric(mean_expression)){
-
+        
+        # sort data by mean expression - original row names are lost
+        sorted_values <- dplyr::arrange(dataset, dplyr::desc(mean))
         # select top genes and store in first position of the list
-        divided_data$topgenes <- subset(dataset, dataset$mean > mean_expression)
+        divided_data$topgenes <- subset(sorted_values, sorted_values$mean > mean_expression)
         # assign bin 0 to the top window
         divided_data[[1]]$bin <- 1
         # display number of genes in the window
         message(paste("Number of genes in top window:",
                       nrow(divided_data$topgenes)))
         # store rest of genes in second position
-        divided_data$restofgenes <- subset(dataset, dataset$mean < mean_expression)
+        divided_data$restofgenes <- subset(sorted_values, sorted_values$mean < mean_expression)
 
     } else if (is.numeric(min_expression)){
-
+        
+        # sort data by mean expression - original row names are lost
+        sorted_values <- dplyr::arrange(dataset, dplyr::desc(mean))
         # extract expression values
-        expr_values <- dplyr::select(dataset, -geneName, -mean, -sd, -cv)
+        expr_values <- dplyr::select(sorted_values, -geneName, -mean, -sd, -cv)
         # select top genes and store in first position of the list
-        divided_data$topgenes <- subset(dataset,
+        divided_data$topgenes <- subset(sorted_values,
                                         rowSums(expr_values > min_expression) == ncol(expr_values))
         # assign bin 0 to the top window
         divided_data[[1]]$bin <- 1
@@ -106,7 +110,7 @@ define_top_genes <- function(dataset,
         message(paste("Number of genes in top window:",
                       nrow(divided_data$topgenes)))
         # store rest of genes in second position
-        divided_data$restofgenes <- subset(dataset,
+        divided_data$restofgenes <- subset(sorted_values,
                                            rowSums(expr_values > min_expression) != ncol(expr_values))
 
     } else {
@@ -117,7 +121,7 @@ define_top_genes <- function(dataset,
 }
 
 # suppress CHECK annoying handling of NSE
-utils::globalVariables(c("geneName", "cv", "bin"))
+utils::globalVariables(c("geneName", "mean", "sd", "cv", "bin"))
 #' Bin genes by mean expression.
 #'
 #' Divides the genes that were not included in the top window in windows of the same size with decreasing

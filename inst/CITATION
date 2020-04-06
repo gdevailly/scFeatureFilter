@@ -1,0 +1,17 @@
+citHeader("To cite scFeatureFilter in publications use:")
+
+citEntry(
+  entry    = "Article",
+  journal = "Bioinformatics and Biomedical Engineering",
+  doi = "10.1007/978-3-319-78723-7_31",
+  url = "https://doi.org/10.1007/978-3-319-78723-7_31",
+  year = "2018",
+  publisher = "Springer International Publishing",
+  pages = "364--370",
+  author = "Angeles Arzalluz-Luque and Guillaume Devailly and Anagha Joshi",
+  title = "scFeatureFilter: Correlation-Based Feature Filtering for Single-Cell RNAseq",
+  booktitle = "Bioinformatics and Biomedical Engineering",
+  textVersion = paste(
+	"Arzalluz-Luque A., Devailly G., Joshi A. (2018) scFeatureFilter: Correlation-Based Feature Filtering for Single-Cell RNAseq. In: Rojas I., Ortuno F. (eds) Bioinformatics and Biomedical Engineering. IWBBIO 2018. Lecture Notes in Computer Science, vol 10813. Springer, Cham"
+  )
+)

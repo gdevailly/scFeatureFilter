@@ -61,7 +61,7 @@ to call \code{scFeatureFilter},and then to close the device with \code{dev.off}.
 sc_feature_filter(scData_hESC)
 
 # with plots
-\dontrun{
+\donttest{
 pdf("diagnostic.pdf")
 sc_feature_filter(sc_data, print_plots = TRUE)
 dev.off()

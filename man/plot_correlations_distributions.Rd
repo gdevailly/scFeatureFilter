@@ -4,8 +4,12 @@
 \alias{plot_correlations_distributions}
 \title{Produce a density plot of correlation values for each window of feature}
 \usage{
-plot_correlations_distributions(df, metrics = NULL, vlines = c("mean",
-  "median"), facet_ncol = 4)
+plot_correlations_distributions(
+  df,
+  metrics = NULL,
+  vlines = c("mean", "median"),
+  facet_ncol = 4
+)
 }
 \arguments{
 \item{df}{A \code{tibble}, usually the output of \code{\link{correlations_to_densities}}.}

@@ -4,9 +4,16 @@
 \alias{sc_feature_filter}
 \title{Filter scRNA-seq expression matrix to keep only highly informative features. Integrated pipeline.}
 \usage{
-sc_feature_filter(sc_data, print_plots = FALSE, max_zeros = 0.75,
-  threshold = 2, top_window_size = 100, other_window_size = 1000,
-  n_random = 3, sce_assay = NULL)
+sc_feature_filter(
+  sc_data,
+  print_plots = FALSE,
+  max_zeros = 0.75,
+  threshold = 2,
+  top_window_size = 100,
+  other_window_size = 1000,
+  n_random = 3,
+  sce_assay = NULL
+)
 }
 \arguments{
 \item{sc_data}{A data frame, a matrix or a \code{SingleCellExperiment} object.

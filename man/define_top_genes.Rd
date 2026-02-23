@@ -4,8 +4,12 @@
 \alias{define_top_genes}
 \title{Define the reference window using the most highly expressed features.}
 \usage{
-define_top_genes(dataset, window_size = NULL, mean_expression = NULL,
-  min_expression = NULL)
+define_top_genes(
+  dataset,
+  window_size = NULL,
+  mean_expression = NULL,
+  min_expression = NULL
+)
 }
 \arguments{
 \item{dataset}{A data frame, containing features as rows and cells as columns, and where
@@ -33,13 +37,13 @@ There are three selection methods available:
 
 \itemize{
 
-\item \code{window_size}: features are ranked by mean expression across cells, and the top slice
+     \item \code{window_size}: features are ranked by mean expression across cells, and the top slice
      of the specified size is selected.
 
-\item \code{mean_expression}: the \code{mean} column is checked, and all features with mean
+     \item \code{mean_expression}: the \code{mean} column is checked, and all features with mean
      expression above the threshold indicated are selected.
 
-\item \code{min_expression}: features where all expression values are above the
+     \item \code{min_expression}: features where all expression values are above the
      expression threshold indicated are selected.
 
 }

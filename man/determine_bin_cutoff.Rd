@@ -5,9 +5,12 @@
 \title{Determine a threshold for selecting bins of features
 based on the metric table}
 \usage{
-determine_bin_cutoff(metric_table, threshold = 2,
+determine_bin_cutoff(
+  metric_table,
+  threshold = 2,
   selected_metric = c("mean", "median", "score"),
-  random_function_summarisation = mean)
+  random_function_summarisation = mean
+)
 }
 \arguments{
 \item{metric_table}{A data frame, usually the output of \code{\link{get_mean_median}}.}

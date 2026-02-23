@@ -1,5 +1,5 @@
-Introducing scFeatureFilter, an R package to inform
-feature selection threshold in single cell RNA-seq
-experiments.
+# scFeatureFilter 1.32.1 (2026-02-23)
++ dplyr filter_() replacment
++ converting some steps into native pipe
 
-2019-12-06: The vignette is no longer failing
+# 2019-12-06: The vignette is no longer failing

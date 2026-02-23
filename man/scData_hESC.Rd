@@ -4,11 +4,13 @@
 \name{scData_hESC}
 \alias{scData_hESC}
 \title{Expression data from 32 human embryonic stem cells}
-\format{A \code{tibble} with 60,468 rows (genes) and 33 columns (cells):
+\format{
+A \code{tibble} with 60,468 rows (genes) and 33 columns (cells):
 \describe{
   \item{tracking_id}{The Gencode human encode gene id}
   \item{next 33 columns}{Single embryonic stem cells}
-}}
+}
+}
 \source{
 The example dataset was processed by Mantsoki et al. (2016)
 \url{https://www.ncbi.nlm.nih.gov/pubmed/26951854},

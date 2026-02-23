@@ -4,10 +4,17 @@
 \alias{plot_metric}
 \title{Produce a bar chart of mean (or median) correlation coefficient per bin of feature.}
 \usage{
-plot_metric(metric_table, selected_metric = c("mean", "median", "score"),
-  show_ctrl = TRUE, control_color = "blue", show_threshold = TRUE,
-  threshold = 2, threshold_color = "red", line_size = 1,
-  annotate_lines = TRUE)
+plot_metric(
+  metric_table,
+  selected_metric = c("mean", "median", "score"),
+  show_ctrl = TRUE,
+  control_color = "blue",
+  show_threshold = TRUE,
+  threshold = 2,
+  threshold_color = "red",
+  line_size = 1,
+  annotate_lines = TRUE
+)
 }
 \arguments{
 \item{metric_table}{A \code{tibble}, usually the output of \code{\link{get_mean_median}}.}
@@ -39,14 +46,13 @@ randomised top window are shown as dot-and-whiskers, and are used to estimate a
 background level.
 }
 \examples{
-library(magrittr)
-scData_hESC \%>\%
-    calculate_cvs \%>\%
-    define_top_genes(window_size = 100) \%>\%
-    bin_scdata(window_size = 1000) \%>\%
-    correlate_windows(n_random = 3) \%>\%
-    get_mean_median \%>\%
-    plot_metric
+scData_hESC |>
+    calculate_cvs() |>
+    define_top_genes(window_size = 100) |>
+    bin_scdata(window_size = 1000) |>
+    correlate_windows(n_random = 3) |>
+    get_mean_median() |>
+    plot_metric()
 
 }
 \seealso{

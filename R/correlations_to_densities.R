@@ -26,7 +26,7 @@ utils::globalVariables(c("window", "."))
 #' Default to \code{TRUE} to simplify plots and avoid annoying, non-symmetrical,
 #' near 0, shifts of distributions.
 #'
-#' @return A \code{\link{tibble}} with columns \code{bin}, \code{window}, \code{cor_coef} and \code{density}.
+#' @return A \code{\link[tibble]{tibble}} with columns \code{bin}, \code{window}, \code{cor_coef} and \code{density}.
 #'
 #' @examples
 #' library(magrittr)
@@ -46,6 +46,6 @@ utils::globalVariables(c("window", "."))
 #'
 #' @export
 correlations_to_densities <- function(df, n = 64, absolute_cc = TRUE) {
-    dplyr::group_by(df, bin, window) %>%
+    dplyr::group_by(df, bin, window) |>
         dplyr::do(do.call(tibble::tibble, .applyDensity(.$cor_coef, n = n, absolute_cc = absolute_cc)))
 }

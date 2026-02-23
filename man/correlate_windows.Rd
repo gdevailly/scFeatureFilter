@@ -27,7 +27,7 @@ This function:
      \item correlates each feature in each window to each feature in the
       top window.
 
-\item randomize the top window by shuffling expression value, and
+     \item randomize the top window by shuffling expression value, and
       correlate each gene in each window to the randomized top window.
       This negative control is repeated as many time as specified by
      the \code{n_random} parameter.

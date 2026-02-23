@@ -108,28 +108,26 @@ calculate_cvs(scData_hESC)
 
 We can explore the mean - variance relationship of the dataset with the `plot_mean_variance` function:
 ```{r, collapse=TRUE}
-library(magrittr) # to use the pipe %>%
-
-calculate_cvs(scData_hESC) %>%
+calculate_cvs(scData_hESC) |>
     plot_mean_variance(colourByBin = FALSE)
 ```
 
 The top window (or reference bin) is then defined with the `define_top_genes` function, while the rest of bins
 are created with the `bin_scdata` function:
 ```{r, collapse=TRUE}
-scData_hESC %>%
-    calculate_cvs %>%
-    define_top_genes(window_size = 100) %>%
+scData_hESC |>
+    calculate_cvs() |>
+    define_top_genes(window_size = 100) |>
     bin_scdata(window_size = 1000)
 ```
 
 Then, we can plot the resulting bin definition using the same `plot_mean_variance` function, setting the 
 `colourByBin` argument to `TRUE`:
 ```{r collapse=TRUE}
-myPlot <- scData_hESC %>%
-    calculate_cvs %>%
-    define_top_genes(window_size = 100) %>%
-    bin_scdata(window_size = 1000) %>%
+myPlot <- scData_hESC |>
+    calculate_cvs() |>
+    define_top_genes(window_size = 100) |>
+    bin_scdata(window_size = 1000) |>
     plot_mean_variance(colourByBin = TRUE, density_color = "blue")
 
 myPlot
@@ -146,10 +144,10 @@ After binning the data, correlations (by default, Pearson's) can be calculated. 
 to every other feature in the reference bin (as well as in the randomized control bins) using the 
 function `correlate_windows`:
 ```{r, collapse=TRUE}
-corDistrib <- scData_hESC %>%
-    calculate_cvs %>%
-    define_top_genes(window_size = 100) %>%
-    bin_scdata(window_size = 1000) %>%
+corDistrib <- scData_hESC |>
+    calculate_cvs() |>
+    define_top_genes(window_size = 100) |>
+    bin_scdata(window_size = 1000) |>
     correlate_windows(n_random = 3)
 ```
 
@@ -219,12 +217,12 @@ determine_bin_cutoff(metrics, threshold = 2)
 Finally, using this information, the function `filter_expression_table` can be used to obtain a filtered 
 expression matrix from the original data:
 ```{r, collapse=TRUE}
-binned_data <- scData_hESC %>%
-    calculate_cvs %>%
-    define_top_genes(window_size = 100) %>%
+binned_data <- scData_hESC |>
+    calculate_cvs() |>
+    define_top_genes(window_size = 100) |>
     bin_scdata(window_size = 1000)
-metrics <- correlate_windows(binned_data, n_random = 3) %>%
-    get_mean_median
+metrics <- correlate_windows(binned_data, n_random = 3) |>
+    get_mean_median()
 
 filtered_data <- filter_expression_table(
     binned_data,
@@ -307,19 +305,19 @@ It is a more flexible parameter, and can safely be decreased to
 `500` or `250`, (which will result in more bins) without significantly 
 altering the proposed filtering threshold:
 ```{r, collapse=TRUE}
-metrics_bigBins <- scData_hESC %>%
-    calculate_cvs %>%
-    define_top_genes(window_size = 100) %>%
-    bin_scdata(window_size = 1000) %>%
-    correlate_windows(n_random = 3) %>%
-    get_mean_median
+metrics_bigBins <- scData_hESC |>
+    calculate_cvs() |>
+    define_top_genes(window_size = 100) |>
+    bin_scdata(window_size = 1000) |>
+    correlate_windows(n_random = 3) |>
+    get_mean_median()
 
-metrics_smallBins <- scData_hESC %>%
-    calculate_cvs %>%
-    define_top_genes(window_size = 100) %>%
-    bin_scdata(window_size = 500) %>%
-    correlate_windows(n_random = 3) %>%
-    get_mean_median
+metrics_smallBins <- scData_hESC |>
+    calculate_cvs() |>
+    define_top_genes(window_size = 100) |>
+    bin_scdata(window_size = 500) |>
+    correlate_windows(n_random = 3) |>
+    get_mean_median()
 
 plot_grid(
     plot_metric(metrics_bigBins) +

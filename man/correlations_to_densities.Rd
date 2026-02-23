@@ -16,7 +16,7 @@ Default to \code{TRUE} to simplify plots and avoid annoying, non-symmetrical,
 near 0, shifts of distributions.}
 }
 \value{
-A \code{\link{tibble}} with columns \code{bin}, \code{window}, \code{cor_coef} and \code{density}.
+A \code{\link[tibble]{tibble}} with columns \code{bin}, \code{window}, \code{cor_coef} and \code{density}.
 }
 \description{
 Takes the output of \code{\link{correlate_windows}} and computes density

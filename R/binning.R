@@ -72,17 +72,17 @@ define_top_genes <- function(dataset,
         # sort data by mean expression - original row names are lost
         sorted_values <- dplyr::arrange(dataset, dplyr::desc(mean))
         # select the top x genes (x=window size selected)
-        divided_data$topgenes <- sorted_values[1:window_size, ]
+        divided_data$topgenes <- sorted_values[seq_len(window_size), ]
         # assign bin 0 to the top window
         divided_data[[1]]$bin <- 1
         # display mean FPKM value of the last gene in the top window
         message(paste("Mean expression of last top gene:",
                       sorted_values[window_size, ]$mean))
         # store the rest of the genes a the second element of the list
-        divided_data$restofgenes <- sorted_values[-(1:nrow(divided_data$topgenes)), ]
+        divided_data$restofgenes <- sorted_values[-(seq_len(nrow(divided_data$topgenes))), ]
 
     } else if (is.numeric(mean_expression)){
-        
+
         # sort data by mean expression - original row names are lost
         sorted_values <- dplyr::arrange(dataset, dplyr::desc(mean))
         # select top genes and store in first position of the list
@@ -96,7 +96,7 @@ define_top_genes <- function(dataset,
         divided_data$restofgenes <- subset(sorted_values, sorted_values$mean < mean_expression)
 
     } else if (is.numeric(min_expression)){
-        
+
         # sort data by mean expression - original row names are lost
         sorted_values <- dplyr::arrange(dataset, dplyr::desc(mean))
         # extract expression values

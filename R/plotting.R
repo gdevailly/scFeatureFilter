@@ -118,7 +118,7 @@ plot_correlations_distributions <- function(df, metrics = NULL, vlines = c("mean
         guides(color = FALSE)
     if (!is.null(metrics)) {
 
-        metrics <- dplyr::select_(metrics, "bin", "window", vlines) %>%
+        metrics <- dplyr::select(metrics, "bin", "window", {{ vlines }}) %>%
             dplyr::rename(metric = !!vlines) %>%
             dplyr::mutate(window = sub("_[0-9]+$", "", window)) %>%
             dplyr::group_by(bin, window) %>%
@@ -172,14 +172,13 @@ plot_correlations_distributions <- function(df, metrics = NULL, vlines = c("mean
 #' @seealso \code{\link{get_mean_median}}
 #'
 #' @examples
-#' library(magrittr)
-#' scData_hESC %>%
-#'     calculate_cvs %>%
-#'     define_top_genes(window_size = 100) %>%
-#'     bin_scdata(window_size = 1000) %>%
-#'     correlate_windows(n_random = 3) %>%
-#'     get_mean_median %>%
-#'     plot_metric
+#' scData_hESC |>
+#'     calculate_cvs() |>
+#'     define_top_genes(window_size = 100) |>
+#'     bin_scdata(window_size = 1000) |>
+#'     correlate_windows(n_random = 3) |>
+#'     get_mean_median() |>
+#'     plot_metric()
 #'
 #' @export
 plot_metric <- function(
@@ -225,7 +224,7 @@ plot_metric <- function(
     if(show_ctrl) {
         p <- p +
             geom_hline(yintercept = mean(metricsTable$ctrl_window_median), linetype = "dashed",
-                       color = control_color, size = line_size)
+                       color = control_color, linewidth = line_size)
         if(annotate_lines) {
             p <- p +
                 annotate("text", label = "Background", x = 0.6, y = mean(metricsTable$ctrl_window_median) + 0.01,
@@ -235,7 +234,7 @@ plot_metric <- function(
     if(show_threshold) {
         p <- p +
             geom_hline(yintercept = threshold * mean(metricsTable$ctrl_window_median), linetype = "dashed",
-                       color = threshold_color, size = line_size)
+                       color = threshold_color, linewidth = line_size)
         if(annotate_lines) {
             p <- p +
                 annotate("text", label = paste0(threshold, " x Background"),
@@ -250,7 +249,7 @@ plot_metric <- function(
             width = 0.5, color = "gray30"
         ) +
         geom_point(aes(y = ctrl_window_median), color = "gray30") +
-        guides(fill = FALSE) +
+        guides(fill = "none") +
         labs(y = paste0("Correlation coefficient (", selected_metric, ")"))
 
     return(p)

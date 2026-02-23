@@ -4,8 +4,13 @@
 \alias{plot_mean_variance}
 \title{Produce a mean expression x coefficient of variation scatter plot.}
 \usage{
-plot_mean_variance(df, density = TRUE, colourByBin = TRUE,
-  density_color = "blue", ...)
+plot_mean_variance(
+  df,
+  density = TRUE,
+  colourByBin = TRUE,
+  density_color = "blue",
+  ...
+)
 }
 \arguments{
 \item{df}{A \code{tibble}, usually the output of \code{\link{calculate_cvs}} or \code{\link{bin_scdata}}.}
